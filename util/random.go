@@ -8,13 +8,16 @@ import (
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
+var r *rand.Rand
+
 func init() {
-	rand.Seed(time.Now().UnixNano())
+	source := rand.NewSource(time.Now().UnixNano())
+	r = rand.New(source)
 }
 
 // RandomInt generates a random integer between min and max
 func RandomInt(min, max int64) int64 {
-	return min + rand.Int63n(max-min+1)
+	return min + r.Int63n(max-min+1)
 }
 
 // RandomString generates a random string of length n
@@ -23,7 +26,7 @@ func RandomString(n int) string {
 	k := len(alphabet)
 
 	for range n {
-		c := alphabet[rand.Intn(k)]
+		c := alphabet[r.Intn(k)]
 		sb.WriteByte(c)
 	}
 
@@ -44,5 +47,5 @@ func RandomMoney() int64 {
 func RandomCurrency() string {
 	currencies := []string{"EUR", "USD", "CAD"}
 	n := len(currencies)
-	return currencies[rand.Intn(n)]
+	return currencies[r.Intn(n)]
 }
