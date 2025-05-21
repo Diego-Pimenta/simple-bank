@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    # https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
     permissions:
       id-token: write # This is required for requesting the JWT
       contents: read  # This is required for actions/checkout
@@ -26,6 +27,9 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Load secrets and save to app.env
+      run: aws secretsmanager get-secret-value --secret-id simple_bank --query SecretString --output text | jq -r 'to_entries | map("\(.key)=\(.value)") | .[]' > app.env
 
     - name: Build, tag, and push docker image to Amazon ECR
       env:
