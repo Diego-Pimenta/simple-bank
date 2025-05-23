@@ -11,12 +11,9 @@ FROM alpine:edge
 WORKDIR /app
 COPY --from=build /app/main .
 COPY --from=build /app/migrate ./migrate
-COPY app.env .
-COPY start.sh .
-COPY wait-for.sh .
+COPY app.env start.sh wait-for.sh ./
 COPY db/migration ./db/migration
-RUN chmod +x ./start.sh
-RUN chmod +x ./wait-for.sh
+RUN chmod +x ./start.sh ./wait-for.sh
 EXPOSE 8080
 CMD ["/app/main"]
 ENTRYPOINT [ "/app/start.sh" ]
