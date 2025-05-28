@@ -16,6 +16,7 @@ require (
 	github.com/o1egl/paseto v1.0.0
 	github.com/rakyll/statik v0.1.7
 	github.com/redis/go-redis/v9 v9.8.0
+	github.com/rs/cors v1.11.1
 	github.com/rs/zerolog v1.34.0
 	github.com/spf13/viper v1.20.1
 	golang.org/x/crypto v0.38.0
