@@ -20,6 +20,9 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
+          name: http-server
+        - containerPort: 9090
+          name: grpc-server
         resources:
           requests:
             memory: "64Mi"

@@ -11,5 +11,5 @@ COPY --from=build /app/main .
 COPY app.env wait-for.sh ./
 COPY db/migration ./db/migration
 RUN chmod +x ./wait-for.sh
-EXPOSE 8080
+EXPOSE 8080 9090
 CMD ["/app/main"]
